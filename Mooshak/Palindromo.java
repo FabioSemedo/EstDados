@@ -1,42 +1,42 @@
 import java.util.Scanner;
 
 public class Palindromo{
-    public void palindromo(String str){
-        boolean ispalindromo = true;
-        int i=0;
-        int j=s.length();
+    public static String cleaner(String st){
+        st = st.toLowerCase();
+        st = st.replaceAll("[^a-zA-Z]", "");
 
-        while(i<j){
-            if(s.charAt(i).isAlpha())
-
-            ++i;
-            --j;
-        }
-        
-        
-        if(ispalindromo) System.out.println("sim");
-        else System.out.println("nao");
+        //System.out.println("«« "+st+" »»");
+        return st;
     }
+
+    public static boolean isPalindromo(String st){
+        int j = 0;
+
+        st = cleaner(st);
+        j = st.length()-1;
+
+        for(int i=0; i<j; i++){
+            if(st.charAt(i)!=st.charAt(j)){
+                //System.out.print("«« "+i+" »» :"+st.charAt(i)+",«« "+j+" »»: "+st.charAt(j)+" \t" );
+                return false;
+            }
+            j--;
+        }
+
+        return true;
+    }
+
     public static void main(String [] args){
-        int n = Integer.parseInt(new Scanner.in)
-        palindromo(n);
-    }
-}
+        Scanner input = new Scanner(System.in);
+        int n = Integer.parseInt(input.nextLine());
+        System.out.println(n);
 
-import java.util.Scanner;
-
-public class Losango2{
-    static void losango(int n){
-        for(int i = 1; i<=n; i+=2){
-            System.out.println(".".repeat((n-i)/2) + "#".repeat(i) + ".".repeat((n-i)/2));
+        for(int i=0; i<n; i++){
+            if(isPalindromo(input.nextLine())){
+                System.out.print("sim\n");
+            }else{
+                System.out.print("nao\n");
+            }
         }
-        for(int i = n-2; i>0; i-=2){
-            System.out.println(".".repeat((n-i)/2) + "#".repeat(i) + ".".repeat((n-i)/2));
-        }
-    }
-    public static void main(String [] args){
-        Scanner s = new Scanner(System.in);
-        int n = s.nextInt();
-        losango(n);
     }
 }
