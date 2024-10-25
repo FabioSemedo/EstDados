@@ -46,13 +46,32 @@ class Matrix {
    }
    public Matrix transpose(){
     Matrix mat = new Matrix(cols,rows);
-        for(int i =0; i<rows; i++){
-            for(int j=i; j< cols; j++){
-                int temp = data[i][j];
-                mat.data[i][j]=data[j][i];
-                mat.data[j][i] = temp;
+        for(int i =0; i<rows; i++){ //in every row
+            for(int j=i; j< cols; j++){// at this element
+                mat.data[j][i] = data[i][j];
             }
         }
+      return mat;
    }
+
+   public Matrix sum(Matrix m){
+      for(int i = 0; i<rows; i++){
+        for(int j=0; j<cols; j++){
+            m[i][j] += data[i][j];
+        }
+      }
+      return m;
+    }
+
+   public Matrix multiply(Matrix m){
+    int a=0, b=0;
+    for(int i=0; i<rows;i++){
+        for(int j=0; j<cols; j++){
+            a += data[i][j] * m.data[j][i];
+        }
+    }
+    return m;
+   }
+   
 }
 
