@@ -45,16 +45,16 @@ class Matrix {
         return mat;
    }
    public Matrix transpose(){
-    Matrix mat = new Matrix(cols,rows);
-        for(int i =0; i<rows; i++){ //in every row
-            for(int j=i; j< cols; j++){// at this element
-                mat.data[j][i] = data[i][j];
+    Matrix mat = new Matrix(this.cols,this.rows);
+        for(int i =0; i<this.rows; i++){ //in every row
+            for(int j=i; j< this.cols; j++){// at this element
+                mat.data[j][i] = this.data[i][j];
             }
         }
       return mat;
    }
 
-   public Matrix sum(Matrix m){
+    public Matrix sum(Matrix m){
       for(int i = 0; i<this.rows; i++){
         for(int j=0; j<this.cols; j++){
             m.data[i][j] += this.data[i][j];
@@ -65,7 +65,6 @@ class Matrix {
 
    public Matrix multiply(Matrix m){
     // this.cols = m.rows
-    int rep = max(this.rows,m.cols);
     int a=0;
     String terms = "";
     Matrix res = new Matrix(this.rows, m.cols);
@@ -73,7 +72,7 @@ class Matrix {
     for(int i=0; i< this.rows; i++){
         for(int j = 0; j< m.cols; j++){
             for(int k=0; k< this.cols; k++){
-                res[i][j] += this.data[i][k]* m.data[k][j]; 
+                res.data[i][j] += this.data[i][k]* m.data[k][j]; 
             }
         }
     }
