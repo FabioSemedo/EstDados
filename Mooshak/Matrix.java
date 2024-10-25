@@ -55,22 +55,30 @@ class Matrix {
    }
 
    public Matrix sum(Matrix m){
-      for(int i = 0; i<rows; i++){
-        for(int j=0; j<cols; j++){
-            m[i][j] += data[i][j];
+      for(int i = 0; i<this.rows; i++){
+        for(int j=0; j<this.cols; j++){
+            m.data[i][j] += this.data[i][j];
         }
       }
       return m;
     }
 
    public Matrix multiply(Matrix m){
-    int a=0, b=0;
-    for(int i=0; i<rows;i++){
-        for(int j=0; j<cols; j++){
-            a += data[i][j] * m.data[j][i];
+    // this.cols = m.rows
+    int rep = max(this.rows,m.cols);
+    int a=0;
+    String terms = "";
+    Matrix res = new Matrix(this.rows, m.cols);
+
+    for(int i=0; i< this.rows; i++){
+        for(int j = 0; j< m.cols; j++){
+            for(int k=0; k< this.cols; k++){
+                res[i][j] += this.data[i][k]* m.data[k][j]; 
+            }
         }
     }
-    return m;
+    
+    return res;
    }
    
 }
