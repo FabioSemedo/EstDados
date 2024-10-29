@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-public class Game {
+public class Game004 {
     private int n;
     private char m[][];
 
-    Game(int _size){
+    Game004(int _size){
         n= _size;
         m = new char [n][n];
     }
@@ -78,14 +78,5 @@ public class Game {
             System.out.println("Empate");
         else 
             System.out.println("Jogo incompleto");        
-    }
-    
-    public static void main(String[]args){
-        Scanner in = new Scanner ( System .in );
-        int n = in.nextInt ();
-
-        Game g = new Game(n);
-        g.read(in);
-        g.check();
     }
 }
