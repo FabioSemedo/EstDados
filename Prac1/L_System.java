@@ -1,4 +1,4 @@
-public class Numbers {
+public class L_System {
     // Prac 1 Extra 4
     /*
     Crie um procedimento que receba um inteiro n e escreva as primeiras n linhas do L-system original de Lindenmayer, que usa as seguintes regras:

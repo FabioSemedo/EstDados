@@ -1,4 +1,4 @@
-public class Numbers {
+public class Count {
     // Prac 1 Extra 3
     static int count(String s, char c){
         int counter=0;

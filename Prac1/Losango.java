@@ -1,4 +1,4 @@
-public class Extra{
+public class Losango{
     static void losango(int n){
         int i = 1;
         for(i = 1; i<=n; i+=2){
