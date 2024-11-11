@@ -25,11 +25,13 @@ public class BooleanArrayIntSet implements IntSet {
             return false;
             //throw new RuntimeException("Maximum size of set reached");         
         }
-
-        elem[x] = true;
-        size++;
-        return true;
-    }        
+        if (!contains(x)) {
+            elem[x] = true; 
+            size++;
+            return true;            
+        }
+        return false;
+    } 
 
     public boolean remove(int x){        // Remove x do conjunto (devolve true se conseguir)
         if (contains(x)) {
