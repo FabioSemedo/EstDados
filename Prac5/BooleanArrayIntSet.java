@@ -31,7 +31,7 @@ public class BooleanArrayIntSet implements IntSet {
             return true;            
         }
         return false;
-    } 
+    }        
 
     public boolean remove(int x){        // Remove x do conjunto (devolve true se conseguir)
         if (contains(x)) {
@@ -75,26 +75,36 @@ public class BooleanArrayIntSet implements IntSet {
         return res;
     }
 
+    public void print(){
+        for(int i = 0; i < this.elem.length; i++){
+            if(elem[i])
+                System.out.print(i+", ");
+        }
+        System.out.println("\nSize: "+ this.size());
+    }
+
 
     // public static void main(String[] args) {
-    //     int n = 1000000;                      
-    //     IntSet s = new BooleanArrayIntSet(n); // Criar array de booleanos para numeros no intervalo [1,n]
+    //     int n = 100;                      
+    //     BooleanArrayIntSet s = new BooleanArrayIntSet(n); // Criar array de booleanos para numeros no intervalo [1,n]
     //     boolean tmp;
-            
-    //     System.out.println("Adicionando todos os numeros entre 1 e " + n + "...");
-    //     for (int i=1; i<=n; i++)
-    //         tmp = s.add(i);
     
+    //     System.out.println("Adicionando todos os numeros entre 1 e " + n + "...");
+    //     for (int i=1; i<=n; i=i+3)
+    //         tmp = s.add(i);
+    //     s.print();
     //     System.out.println("Adicionando novamente todos os numeros entre 1 e " + n + "...");
     //     for (int i=1; i<=n; i++)
     //         tmp = s.add(i);
-    
+    //     s.print();
     //     System.out.println("Verificando se todos os numeros entre 1 e " + n + " existem...");
     //     for (int i=1; i<=n; i++)
     //         tmp = s.contains(i);
-    
+    //     s.print();
     //     System.out.println("Removendo todos os numeros entre 1 e " + n + "...");
     //     for (int i=1; i<=n; i++)
     //         tmp = s.remove(i);
-    //     }
-}
+    //     s.print();
+
+    //}    //end main
+}//end class
