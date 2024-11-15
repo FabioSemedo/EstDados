@@ -5,8 +5,6 @@
 // Lista ligada simples (Pedro Ribeiro @ DCC-FCUP)
 // -----------------------------------------------------------
 
-import org.w3c.dom.Node;
-
 public class SinglyLinkedList<T> {
    private Node<T> first;    // Primeiro no da lista
    private int size;         // Tamanho da lista
@@ -95,6 +93,109 @@ public class SinglyLinkedList<T> {
          return cur.getValue();
 
       return null;
+   }
+
+   public T remove(int pos){
+      if(pos < 0 || this.size-1 < pos || this.isEmpty()) 
+       return null;
+      
+       Node<T> cur,prev;
+       
+       cur = this.first;
+       
+      if(pos==0){
+         first = first.getNext();
+         size--;
+         return cur.getValue();
+      }
+         
+      prev = first;
+      while(prev.getNext()!=null && pos>1){
+         prev = prev.getNext();
+         pos--;
+      }
+      cur = prev.getNext();
+
+      if(cur !=null && pos==1)
+      {
+         prev.setNext(prev.getNext().getNext());
+         size--;
+         return cur.getValue();
+      }
+
+      return null;
+   }
+
+   public SinglyLinkedList<T> copy(){
+      SinglyLinkedList<T> temp = new SinglyLinkedList<T>();
+      if(first ==null){
+         temp.first = null;
+         temp.size = 0;
+         return temp;
+      }
+      
+      Node <T> cur, nxt;
+      
+      nxt = first;
+      cur = new Node <T> (nxt.getValue(), null);
+      
+      temp.first= cur;
+      temp.size = this.size();
+      nxt = nxt.getNext();
+
+      while(nxt!=null){
+         cur.setNext(new Node <T> (nxt.getValue(),null));
+         cur = cur.getNext();
+         nxt = nxt.getNext();
+      }
+      
+      cur.setNext(null);
+      return temp;
+   }
+
+   public void duplicate(){
+      Node <T> cur = first;
+      this.size = this.size()*2;
+      while(cur!=null){
+         cur.setNext(new Node <T> (cur.getValue(), cur.getNext()));
+         cur = cur.getNext().getNext();
+      }
+   }
+
+   public int count(T v){
+      int count = 0;
+
+      Node <T> cur = first;
+
+      while(cur!=null){
+         if(cur.getValue().equals(v)){
+            count++;
+         }
+         cur = cur.getNext();
+      }
+      
+      return count;
+   }
+
+   public void removeAll(T v){
+      if(first==null) return;
+
+      Node <T> cur = first;
+
+      while(cur!=null && cur.getValue().equals(v)){
+         cur.setNext(cur.getNext());
+      }
+
+      if(cur==null) return;
+
+      while(cur!=null && cur.getNext()!=null){
+         if(cur.getNext().getValue().equals(v)){//remove next
+            cur.setNext(cur.getNext().getNext());
+            this.size--;
+         }else{
+            cur = cur.getNext();                //go to next
+         }
+      }
    }
    
    // Converte a lista para uma String
