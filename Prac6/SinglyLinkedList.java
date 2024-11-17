@@ -178,17 +178,17 @@ public class SinglyLinkedList<T> {
    }
 
    public void removeAll(T v){
-      if(first==null) return;
+      if(this.isEmpty()) return;
+
+      while(first!=null && first.getValue().equals(v)){
+         removeFirst();
+      }
 
       Node <T> cur = first;
 
-      while(cur!=null && cur.getValue().equals(v)){
-         cur.setNext(cur.getNext());
-      }
-
       if(cur==null) return;
 
-      while(cur!=null && cur.getNext()!=null){
+      while(cur!= null && cur.getNext()!=null){// cur -- target -- nxtNxt
          if(cur.getNext().getValue().equals(v)){//remove next
             cur.setNext(cur.getNext().getNext());
             this.size--;
