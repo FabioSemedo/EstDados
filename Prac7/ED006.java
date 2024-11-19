@@ -2,13 +2,22 @@ import java.util.Scanner;
 
 public class ED006{
     public static String game(int turns, String name, CircularLinkedList<String>list){
+        CircularLinkedList <String> winners = new CircularLinkedList<String>();
+        //System.out.println("Turns: "+ turns);
+        //System.out.println("List: "+ list);
+        
         while(list.size()>1){
-            for (int i = 0; i < (turns % list.size())-1; i++) {//If turns = 1, rotations should be 0; turns 2 => rot 1; ...
+            int n = turns % list.size() - 1;
+            if(n<0) n = n + list.size();
+
+            for (int i = 0; i < n; i++) {//If turns = 1, rotations should be 0; turns 2 => rot 1; ...
                 list.rotate();
             }
-
+            winners.addLast(list.getFirst());
             list.removeFirst();
         }
+        
+        //System.out.println("Winners: "+winners);
 
         if(list.getFirst().equalsIgnoreCase(name))// Name is last one left, Name has lost.
         {
