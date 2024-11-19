@@ -3,60 +3,53 @@ import java.util.Scanner;
 public class ED006{
     public static String game(int turns, String name, CircularLinkedList<String>list){
         while(list.size()>1){
-            for (int i = 0; i < turns-1; i++) {//turn -1 to let us use removeFirst, turn - 1, instead of removeLast, turn.
+            for (int i = 0; i < (turns % list.size())-1; i++) {//If turns = 1, rotations should be 0; turns 2 => rot 1; ...
                 list.rotate();
             }
 
             list.removeFirst();
         }
-        
-        String temp = list.getLast();
-        if(temp.equalsIgnoreCase(name))// Name is last one standing
+
+        if(list.getFirst().equalsIgnoreCase(name))// Name is last one left, Name has lost.
         {
-            return "O "+name+" livrou-se (coitado do "+list.getLast()+"!)";
+            return "O "+name+" nao se livrou";
         }
         
-        return "O "+name+" nao se livrou";
+        return "O "+name+" livrou-se (coitado do "+list.getFirst()+"!)";
     }
 
     public static void main (String [] args){
         Scanner in  = new Scanner(System.in);
         Scanner line= new Scanner(in.nextLine());
 
-        CircularLinkedList list;
-        Node<String> child;
+        CircularLinkedList<String> list;
         String carlos =  "Carlos";
-
-        boolean testFlag = true;
 
         int n_games = line.nextInt();
         int players=0;
         int turns=0;
-
-        System.out.printf("%d, %d, %d, %s\n", n_games, players, turns, "");
-
-        //game loop
+            
+            //game loop
         for (int i = 0; i < n_games; i++) {
             line = new Scanner(in.nextLine());
-            
+            turns = 0;
             while(line.hasNext()){
                 turns++;
                 line.next();
             }
             
-            if(testFlag){
-                System.out.println("Words ="+ turns);
-            }
-            
-            players = in.nextInt();
+            line = new Scanner(in.nextLine());
             list = new CircularLinkedList<String>();
-
+            players = line.nextInt();
+            
+            // System.out.printf("52: Games, players, turns:  %d, %d, %d\n\n", n_games, players, turns);
             for (int j = 0; j < players; j++) {
-                child = new Node<String>(in.next(), null);
-                list.addLast(child);
+                list.addLast(line.next());
             }
 
             System.out.println( game(turns, carlos, list));
+            line.close();
         }
+        in.close();
     }
 }
