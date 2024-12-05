@@ -1,0 +1,15 @@
+Ex1:
+
+a) fn = n2, gn = n3
+b) fn = n , gn = n
+c) fn = 2^n, gn = n2
+d) fn = 1 , gn = 1
+e) fn = nlogn, gn = n2
+f) fn = n1/2, gn = logn
+
+	f E O(g)	f E Best_g	f = Average_g
+a	yes		no		maybe
+b	yes		yes		yes
+c	no		no		no
+d	yes		yes		yes
+e	yes		
