@@ -114,7 +114,7 @@ public class BTree<T> {
    public void printBFS() {
       System.out.print("BFS:");
       
-      MyQueue<BTNode<T>> q = new LinkedListQueue<BTNode<T>>();
+      MyQueue <BTNode<T>> q = new LinkedListQueue<BTNode<T>>();
       q.enqueue(root);
       while (!q.isEmpty()) {
          BTNode<T> cur = q.dequeue();
@@ -133,7 +133,7 @@ public class BTree<T> {
    public void printDFS() {
       System.out.print("DFS:");
       
-      MyStack<BTNode<T>> q = new LinkedListStack<BTNode<T>>();
+      MyStack <BTNode<T>> q = new LinkedListStack<BTNode<T>>();
       q.push(root);
       while (!q.isEmpty()) {
          BTNode<T> cur = q.pop();
@@ -145,5 +145,55 @@ public class BTree<T> {
       }
       System.out.println();
    }
+
+   public int numberLeafs(){
+      return numberLeafs(root);
+   }
+
+   private int numberLeafs(BTNode<T> n) {
+      if (n == null) return 0;
+      if(n.getLeft()==null && n.getRight()==null) return 1;
+      return numberLeafs(n.getLeft()) + numberLeafs(n.getRight());
+   }
+
+   public  boolean strict(){
+      return strict(root);
+   }
+
+   public boolean strict(BTNode<T> n){
+      if( n.getLeft() == null && n.getRight()== null) return true;
+      if( n.getLeft()!= null && n.getRight()!= null)  return strict(n.getLeft()) && strict(n.getRight());
+      return false;
+   }
+
+   public T path(String s) {
+      if(s=="R") return root.getValue();
+      BTNode <T> cur = root;
+      for (int i = 0; i < s.length(); i++) {
+         switch(s.charAt(i)){
+            case 'E':
+            case 'e':
+               cur = cur.getLeft();
+               break;
+
+            case 'D':
+            case 'd':
+               cur = cur.getRight();
+               break;
+         }
+      }
+
+      return cur.getValue();
+   }
+
+   public int nodesLevel(int k){
+      return nodesLevel(k, root);
+    }
+    public int nodesLevel(int k, BTNode<T> n){
+      if(n == null) return 0;
+      if(k==0) return 1;
+      //System.out.println(n.getValue()+"\tk="+k);
+      return nodesLevel(k-1, n.getLeft()) + nodesLevel(k-1, n.getRight());
+    }
 
 }

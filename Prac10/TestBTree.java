@@ -19,12 +19,14 @@ public class TestBTree {
       System.out.println("depth = " + t.depth());
       System.out.println("contains(2) = " + t.contains(2));
       System.out.println("contains(3) = " + t.contains(3));
+      System.out.println("nodesLevel(3) = " + t.nodesLevel(3));
+
 
       // Escrever nos da arvore seguindo varias ordens possiveis
-      t.printPreOrder();      
-      t.printInOrder();
-      t.printPostOrder();
-      t.printBFS();
-      t.printDFS();
+      // t.printPreOrder();      
+      // t.printInOrder();
+      // t.printPostOrder();
+      // t.printBFS();
+      // t.printDFS();
    }
 }
