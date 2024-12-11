@@ -1,35 +1,52 @@
-class myPair{
-    String s;
-    int sum;
-    
-    myPair(){
-        s = "";
-        sum = 0;
-    }
+import java.util.Scanner;
 
-    int compareTo(myPair p){
-        return this.sum - p.sum;
+class MyPair{
+    String path;
+    int num;
+    
+    MyPair(String s, int n){
+        path = s;
+        num = n;
     }
 }
 
 public class ED213 {
-
+    static int max =0;
     public static int getHeight( BTNode<Integer> cur){
         if(cur==null) return -1;
         return 1 + Math.max(getHeight(cur.getLeft()), getHeight(cur.getRight()));
     }
 
     public static String maxSum(BTree<Integer> t){
-        return goMaxSum(t.getRoot(), new myPair());
+        if(t.getRoot()==null) return "";
+        max = t.getRoot().getValue();
+        return goMaxSum(t.getRoot(),"", new MyPair("", max)).path;
     }
-
-    public static String goMaxSum(BTNode<Integer> t, myPair p){
+    
+    public static MyPair goMaxSum(BTNode<Integer> t, String c, MyPair p){
         if(t==null) return p;
-        if()
+        p.path = p.path + c;
+        p.num += t.getValue();
+        if(t.getLeft()==null && t.getRight()==null) return p;
+        return max( 
+                    goMaxSum(t.getLeft(), "E", new MyPair(p.path, p.num)),
+                    goMaxSum(t.getRight(), "D", new MyPair(p.path, p.num)) 
+                    );
     }
 
-    public static int maxNode(BTNode<Integer> t){
-        if(t==null) return 0;
-        return t.getValue() + Math.max(maxNode(t), maxNode(t.getRight())) 
+    static MyPair max(MyPair p1, MyPair p2){
+        if(p1.num< p2.num) return p2;
+        return p1;
     }
+
+    // public static void main(String[] args) {
+    //     Scanner in = new Scanner(System.in);
+    //     Scanner line;
+
+    //     for (int i = in.nextInt(); i> 0; i--) {
+    //         line = new Scanner(in.nextLine());
+    //         BTree<Integer> t = LibBTree.readIntTree(in);
+    //         System.out.println(maxSum(t));
+    //     }
+    // }
 }
