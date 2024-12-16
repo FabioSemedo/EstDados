@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public // -----------------------------------------------------------
 // Estruturas de Dados 2024/2025 (CC1007) - DCC/FCUP
 // https://www.dcc.fc.up.pt/~fds/aulas/EDados/2425/
@@ -18,19 +20,35 @@ class TestBSTree {
 
       // Escrever resultado de chamada a alguns metodos
       System.out.println("numberNodes = " + t.numberNodes());
+      t.printInOrder();
       System.out.println("depth = " + t.depth());
       System.out.println("contains(2) = " + t.contains(2));
       System.out.println("contains(3) = " + t.contains(3));
       System.out.println("countBetween(6, 17) = " + t.countBetween(6,17));
+
+      Scanner in = new Scanner(System.in);
+      int i = in.nextInt();
+      in.nextLine();
       
-      // Escrever nos da arvore seguindo varias ordens possiveis
-      t.printPreOrder();
-      t.printInOrder();
-      t.printPostOrder();
+      // uncomment BSTree.BSTress(BTree<T>) to run the following for loop
+      // for (i = i; i > 0; i--) {
+      //    Scanner line = new Scanner(in.nextLine());
+      //    BTree<Integer> temp = LibBTree.readIntTree(line);
+      //    t = new BSTree<Integer>(temp);
+      //    t.printInOrder();
+      //    System.out.printf("MaxLeft | root | MinRight\n%s | %s | %s\n", t.maxV(t.getRoot().getLeft()), t.getRoot().getValue(), t.minV(t.getRoot().getRight()));
+      //    System.out.println("Valid = "+t.valid());
+      // }
+
+      in.close();
       
-      // Experimentando remocao
-      t.remove(14);
-      t.printInOrder();
+      // // Escrever nos da arvore seguindo varias ordens possiveis
+      // t.printPreOrder();
+      // t.printPostOrder();
+      
+      // // Experimentando remocao
+      // t.remove(14);
+      // t.printInOrder();
 
    }
 }

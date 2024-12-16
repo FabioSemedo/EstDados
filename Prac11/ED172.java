@@ -1,4 +1,81 @@
-// -----------------------------------------------------------
+import java.util.Scanner;
+
+public class ED172 {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        BSTree<Word> t = new BSTree<Word>();
+
+        while(in.hasNext()){
+            Word w = new Word(in.next());
+            if(t.contains(w)){
+                countWord(t.getRoot(),w);
+            }else{
+                t.insert(w);
+            }
+        }
+
+        print(t.getRoot());
+    }
+
+    public static boolean countWord(BSTNode<Word> t,Word w){
+        if(t==null) return false;
+        if(t.getValue().word.equals(w.word)) {
+            ++t.getValue().count;
+            return true;
+        }
+        if(t.getValue().word.compareTo(w.word) < 0){
+            return countWord(t.getRight(), w);
+        } 
+        return countWord(t.getLeft(), w);
+    }
+
+    public static void print(BSTNode<Word> t){
+        if(t==null) {
+            return;
+        }
+        print(t.getLeft());
+        System.out.println(t.getValue().word + ": "+t.getValue().count);
+        print(t.getRight());
+    }
+}
+
+class Word implements Comparable<Word>{
+    String word;
+    int count;
+    
+    Word(String w){
+        word = w;
+        count = 1;
+    }
+
+    @Override
+    public int compareTo(Word w){
+        return this.word.compareTo(w.word);
+    }
+}
+
+class BSTNode<T extends Comparable<? super T>> {
+    private T value;          // Valor guardado no no
+    private BSTNode<T> left;  // Filho esquerdo
+    private BSTNode<T> right; // Filho direito
+ 
+    // Construtor
+    BSTNode(T v, BSTNode<T> l, BSTNode<T> r) {
+       value = v;
+       left = l;
+       right = r;
+    }
+ 
+    // Getters e Setters
+    public T getValue() {return value;}
+    public BSTNode<T> getLeft() {return left;}
+    public BSTNode<T> getRight() {return right;}
+    public void setValue(T v) {value = v;}
+    public void setLeft(BSTNode<T> l) {left = l;}
+    public void setRight(BSTNode<T> r) {right = r;}   
+ }
+
+ // -----------------------------------------------------------
 // Estruturas de Dados 2024/2025 (CC1007) - DCC/FCUP
 // https://www.dcc.fc.up.pt/~fds/aulas/EDados/2425/
 // -----------------------------------------------------------
@@ -8,7 +85,7 @@
 
 // O tipo T tem de implementar o interface Comparable
 // (ou te-lo herdado de uma super classe).
-public class BSTree<T extends Comparable<? super T>> {   
+class BSTree<T extends Comparable<? super T>> {   
     private BSTNode<T> root; // raiz da arvore
  
     // Construtor
