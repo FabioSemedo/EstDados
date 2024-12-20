@@ -1,0 +1,19 @@
+6
+char
+5 a b d a c
+2 c a
+char
+5 a b d a c
+1 a
+char
+5 a b d a c
+5 a b c d e
+int
+6 42 22 42 42 22 42
+2 42 1
+string
+4 ola ola mundo ola
+1 ola
+int
+6 1 2 3 3 2 1
+1 3

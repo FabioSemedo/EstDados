@@ -1,57 +1,111 @@
 import java.util.Arrays;
+import java.util.Scanner;
+
+import javax.print.DocFlavor.STRING;
 
 public class ED232 {
     public static void main(String[] args) {
-        SinglyLinkedList<Integer> list = new SinglyLinkedList<Integer>();
-        int [] elems = {2,5,1,1,2,1};
+        Scanner in = new Scanner(System.in);
+        String type;
+        int k,n;
+        
+        for (int i = in.nextInt(); i > 0; i--) {
+            type = in.next();
+            switch (type) {
+                case "char":
+                    SinglyLinkedList<Character> list = new SinglyLinkedList<Character>();
+                    SinglyLinkedList<Character> remove = new SinglyLinkedList<Character>();
+                    
+                    n = in.nextInt();
+                    for (int j = 0; j < n; j++) {
+                        list.addLast(in.next().charAt(0));
+                    }
 
-        for (int i = 0; i < elems.length; i++) {
-            list.addLast(elems[i]);     
+                    k = in.nextInt();
+                    for (int j = 0; j < k; j++) {
+                        remove.addLast(in.next().charAt(0));
+                    }
+                    testRemoveChar(list, remove);
+
+                break;
+                
+                case "int":
+                    SinglyLinkedList<Integer> list2 = new SinglyLinkedList<Integer>();
+                    SinglyLinkedList<Integer> remove2 = new SinglyLinkedList<Integer>();
+                    
+                    n = in.nextInt();
+                    for (int j = 0; j < n; j++) {
+                        list2.addLast(in.nextInt());
+                    }
+                    
+                    k = in.nextInt();
+                    for (int j = 0; j < k; j++) {
+                        remove2.addLast(in.nextInt());
+                    }
+                    testRemoveInt(list2, remove2);
+                break;
+
+                case "string":
+                    SinglyLinkedList<String> list3 = new SinglyLinkedList<String>();
+                    SinglyLinkedList<String> remove3 = new SinglyLinkedList<String>();
+                    
+                    n = in.nextInt();
+                    for (int j = 0; j < n; j++) {
+                        list3.addLast(in.next());
+                    }
+                    
+                    k = in.nextInt();
+                    for (int j = 0; j < k; j++) {
+                        remove3.addLast(in.next());
+                    }
+                    testRemoveStr(list3, remove3);
+                break;
+            
+                default:
+                    break;
+            }
         }
-        System.out.println(list.toString());
-        System.out.println();
-        
-        System.out.println(Arrays.toString(list.occurrences(1)));
-        System.out.println(Arrays.toString(list.occurrences(2)));
-        System.out.println(Arrays.toString(list.occurrences(3)));
-        
-        SinglyLinkedList<Character> list2 = new SinglyLinkedList<Character>();
-        SinglyLinkedList<Character> toRemove = new SinglyLinkedList<Character>();
-        char [] cs = {'a','b','d','a','c'};
-        
-        for (int i = 0; i < cs.length; i++) {
-            list2.addLast(cs[i]);     
-        }
+    }
 
-        toRemove.addLast('a');
-        toRemove.addLast('b');
-        toRemove.addLast('c');
-        toRemove.addLast('d');
-
-        System.out.println(list2.toString());
-        System.out.println(list2.size());
+    public static void testRemoveInt(SinglyLinkedList<Integer> list2, SinglyLinkedList<Integer> toRemove){
+        System.out.printf("%s\t%d\n",list2.toString(), list2.size());
         list2.remove(toRemove);
-        System.out.println(list2.toString());
-        System.out.println(list2.size());
+        System.out.printf("Removing %s\n",toRemove.toString(), list2.size());
+        System.out.printf("%s\t%d\n",list2.toString(), list2.size());
+        
+    }
+    public static void testRemoveChar(SinglyLinkedList<Character> list2, SinglyLinkedList<Character> toRemove){
+        System.out.printf("%s\t%d\n",list2.toString(), list2.size());
+        list2.remove(toRemove);
+        System.out.printf("Removing %s\n",toRemove.toString(), list2.size());
+        System.out.printf("%s\t%d\n",list2.toString(), list2.size());
+        
+    }
+    public static void testRemoveStr(SinglyLinkedList<String> list2, SinglyLinkedList<String> toRemove){
+        System.out.printf("%s\t%d\n",list2.toString(), list2.size());
+        list2.remove(toRemove);
+        System.out.printf("Removing %s\n",toRemove.toString(), list2.size());
+        System.out.printf("%s\t%d\n",list2.toString(), list2.size());
+        
     }
 }
 
-class Node<T> {
-    private T value;      // Valor guardado no no
-    private Node<T> next; // Referencia para o proximo no da lista
+// class Node<T> {
+//     private T value;      // Valor guardado no no
+//     private Node<T> next; // Referencia para o proximo no da lista
  
-    // Construtor
-    Node(T v, Node<T> n) {
-       value = v;
-       next = n;
-    }
+//     // Construtor
+//     Node(T v, Node<T> n) {
+//        value = v;
+//        next = n;
+//     }
  
-    // Getters e Setters
-    public T getValue() { return value; }
-    public Node<T> getNext()  { return next; }
-    public void setValue(T v) { value=v; }
-    public void setNext(Node<T> n) { next = n; }
- }
+//     // Getters e Setters
+//     public T getValue() { return value; }
+//     public Node<T> getNext()  { return next; }
+//     public void setValue(T v) { value=v; }
+//     public void setNext(Node<T> n) { next = n; }
+//  }
 
  class SinglyLinkedList<T> {
     private Node<T> first;    // Primeiro no da lista
@@ -106,9 +160,13 @@ class Node<T> {
  
     // Retorna o primeiro valor da lista (ou null se a lista for vazia)
     public T getFirst() {
-       if (isEmpty()) return null;
-       return first.getValue();
-    }
+        if (isEmpty()) return null;
+        return first.getValue();
+     }
+     public Node<T> getFirstN() {
+        if (isEmpty()) return null;
+        return first;
+     }
  
     // Retorna o ultimo valor da lista (ou null se a lista for vazia)
     public T getLast() {
@@ -195,23 +253,27 @@ class Node<T> {
     }
 
     public void remove(SinglyLinkedList<T> toRemove){
-        Node <T> cur = first;
-        
-        while (toRemove.contains(this.getFirst())) {
-            this.removeFirst();
-        }
-        if(first==null) return;
+        if(toRemove.size() == 0 || first == null) return;
+        Node<T> cur = toRemove.getFirstN();
+        Node<T> aux;
 
-        while(cur.getNext()!=null){
-            if(toRemove.contains(cur.getNext().getValue())){
-                cur.setNext(cur.getNext().getNext());
+        for (int i = 0; i < toRemove.size(); i++) {
+            while(first!=null && first.getValue().equals(cur.getValue())){
+                first = first.getNext();
                 size--;
-            }else{
-                cur = cur.getNext();
             }
+            for (aux = first; aux!=null && aux.getNext()!=null; ) {
+                if(aux.getNext().getValue().equals(cur.getValue())){
+                    aux.setNext(aux.getNext().getNext());
+                    size--;
+                }else{
+                    aux = aux.getNext();
+                }
+            }
+            cur = cur.getNext();
         }
     }
-
+    
     public boolean contains(T elem){
         if(elem==null) return false;
 
