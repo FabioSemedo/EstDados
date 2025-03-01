@@ -2,4 +2,5 @@
 *.class
 
 #ignore testers
-*[T,t]est*.txt
+*[T,t]est*.java
+*.txt
